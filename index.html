@@ -495,16 +495,13 @@ const beep = require( 'beep' );
 					<p>
 						In comparison, the Golang standard math library has 54 functions (JS has 35), 8+ PRNGs, as well as support for 64-bit and 128-bit complex numbers. Notably, Golang has equivalents for most C/C++ standard math library functions.
 					</p>
+					<p>
+						Besides being small, the JavaScript standard math library has other problems.
+					</p>
 				</aside>
 			</section>
 
-			<section class="center" data-transition="none">
-				<aside class="notes">
-					Besides being small, the JavaScript standard math library has other problems.
-				</aside>
-			</section>
-
-			<section class="center" data-transition="slide-in fade-out">
+			<section class="center">
 				<ul>
 					<li class="fragment">No standard algorithms.</li>
 					<li class="fragment">No minimum precision.</li>
@@ -517,24 +514,133 @@ const beep = require( 'beep' );
 				<aside class="notes">
 					<ul>
 						<li>
-							ECMA-262 does not specify particular math algorithms (only recommends); hence implementors are free to choose algos according to speed/precision trade-offs
+							ECMA-262 does not specify particular math algorithms (only recommends); hence implementors are free to choose algos according to speed/precision trade-offs.
 						</li>
 						<li>
-							ECMA-262 does not require a minimum precision; hence, no guarantee that a given JavaScript environment has a precise implementation
+							ECMA-262 does not require a minimum precision; hence, no guarantee that a given JavaScript environment has a precise implementation.
 						</li>
 						<li>
-							Portability is non-existent for numeric computing applications due to potential cross-browser variability and potential variability from one browser version to the next
+							Portability is non-existent for numeric computing applications due to potential cross-browser variability and potential variability from one browser version to the next.
 						</li>
 						<li>
-							No common codebase, so resolving issues takes considerable time and effort, especially when different vendors use varying implementations in varying languages with varying organization and structure
+							No common codebase, so resolving issues takes considerable time and effort, especially when different vendors use varying implementations in varying languages with varying organization and structure.
 						</li>
 						<li>
 							Specification-level changes require cross-browser vendor consensus, causing the pace of innovation at the standards level to be slow (e.g., U/Int64 support has been on the table, off the table for more than a decade, and is most recently on the table as part of a BigInt proposal).
 						</li>
 						<li>
-							Bugs are common (cue bug or two; e.g., `pow`)
+							Bugs are common (cue bug or two; e.g., `pow`).
 						</li>
 					</ul>
+				</aside>
+			</section>
+
+			<section class="center">
+				<h2 class="no-text-transform">Math.pow</h2>
+
+				<pre><code class="hljs javascript" contenteditable>
+var x = Math.pow( 10, 308 );
+// returns:  1.0000000000000006e+308
+// expected: 1.0e+308
+				</code></pre>
+
+				<aside class="notes">
+					<p>
+						Node v0.10+.
+					</p>
+					<p>
+						Admittedly, the error is only 3 ulp; however, those 3 ulp matter. Inaccurate results for integer inputs a) is counterintuitive because 10**308 is representable as a double (so not the same counterintuitive as 0.1 + 0.2 != 0.3) and b) ends up causing downstream accuracy issues for higher order mathematical functions as we discovered while writing such functions.
+					</p>
+					<p>
+						See V8 issues <a href="https://bugs.chromium.org/p/v8/issues/detail?id=3599">3599</a> and <a href="https://bugs.chromium.org/p/v8/issues/detail?id=5157">5157</a>.
+					</p>
+				</aside>
+			</section>
+
+			<section class="center">
+				<h2 class="no-text-transform">Math.exp</h2>
+				<pre><code class="hljs javascript" contenteditable>
+var y = Math.exp( 100.0 );
+// returns:  2.6881171418161485e+43
+// expected: 2.6881171418161356e+43
+				</code></pre>
+
+				<aside class="notes">
+					<p>
+						Node v0.12, v4, v6.
+					</p>
+					<p>
+						Error of 26 ulp. For many values, Math.exp returns inaccurate results. Regression in Node v0.12. Fixed in Node v7.
+					</p>
+					<p>
+						See V8 issue <a href="https://bugs.chromium.org/p/v8/issues/detail?id=3468">3468</a>.
+					</p>
+				</aside>
+			</section>
+
+			<section class="center">
+				<aside class="notes">
+					(next slide)
+				</aside>
+			</section>
+
+			<section class="center" data-transition="zoom-in fade-out" data-transition-speed="default">
+				<h2 class="no-text-transform">What's being done?</h2>
+
+				<aside class="notes">
+					What is currently being done at the specification level to address the noted shortcomings? Not much. And it is not entirely clear that the problems should even be addressed at the specification level for the following reasons...
+				</aside>
+			</section>
+
+			<section class="center">
+				<ul>
+					<li class="fragment">The <strong>fragmentation</strong> problem.</li>
+					<li class="fragment">The <strong>portability</strong> problem.</li>
+ 					<li class="fragment">The <strong>versioning</strong> problem.</li>
+					<li class="fragment">The <strong>flexibility</strong> problem.</li>
+ 					<li class="fragment">The <strong>backward compatibility</strong> problem.</li>
+ 					<li class="fragment">The <strong>globals</strong> problem.</li>
+ 					<li class="fragment">The <strong>testing</strong> problem.</li>
+ 					<li class="fragment">The <strong>trust</strong> problem.</li>
+				</ul>
+
+				<aside class="notes">
+					<ul>
+						<li>
+							Updating the specification does not solve the "fragmentation" problem. Notably, even if you agree on a particular algorithm for computing e^x, asking 5 or more different vendors to implement said spec, each in their own way in accordance with their own code base and conventions increases the likelihood that at least one of them will make a mistake, thus leading to the "portability" problem.
+						</li>
+						<li>
+							The "portability" problem is exacerbated by the lack of implementation versioning. Meaning, I cannot independently specify what version of a particular vendor implementation I want in a given runtime, which may be important if I want to guarantee exact reproducibility of my results. In an "evergreen" world, each browser restart means I might have a different underlying implementation.
+						</li>
+						<li>
+							On the flip side, mandating a particular algorithm at the specification level coupled with the "versioning" problem would lead to the "flexibility" problem and a corollary "backward compatibility" problem. Currently, because vendors are not required to either use a particular algorithm or meet precision requirements, they have been free to choose algorithms which, for example, favor speed over accuracy, and because no guarantees have been made in the specification, users cannot expect or rely on consistent implementations, thus allowing vendors to avoid backward compatibility requirements when changing underlying implementations. In short, "we can change our algo and even intentionally sacrifice precision for speed because the spec allows us to." There are reasonable arguments in favor of flexibility, but the domains to which they apply are NOT numeric computing!
+						</li>
+						<li>
+							Other problems include the "globals" problem (i.e., you cannot trust that the host environment has not been hijacked by some other library), the "testing" problem (i.e., browser vendors have historically failed to rigorously test their implementations), and the "trust" problem, which underscores all the other problems.
+						</li>
+					</ul>
+				</aside>
+			</section>
+
+			<section class="center" data-transition="none">
+				<aside class="notes">
+					<p>
+						So, here we are on our roller coaster. You may have gotten a bit excited in seeing the potential of JavaScript and your may have been inspired, imagining various creative ideas and applications, but the state of math in JavaScript may have you feeling a bit blue.
+					</p>
+					<p>
+						 But alas! Surely, there's hope! Whenever the standards bodies have let us down, the community has always risen up and pushed the boundaries of what was previously thought possible!
+					</p>
+					<p>
+						But lo! We should temper our hope for fear that the community not meet our expectations.
+					</p>
+				</aside>
+			</section>
+
+			<section class="center" data-transition="zoom-in" data-transition-speed="default">
+				<h2 class="no-text-transform">State of the Ecosystem</h2>
+
+				<aside class="notes">
+					Sadly, the community does not meet our expectations. And the reasons are as follows...
 				</aside>
 			</section>
 
