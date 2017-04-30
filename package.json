@@ -1,7 +1,7 @@
 {
-  "name": "talk-TODO",
+  "name": "talk-csvconf-2017",
   "version": "0.0.0",
-  "description": "Talk for TODO.",
+  "description": "Talk for csv,conf,v3 (2017).",
   "author": {
     "name": "Athan Reines",
     "email": "kgryte@gmail.com"
@@ -21,7 +21,16 @@
   "keywords": [
 		"talk",
 		"slides",
-		"presentation"
+		"presentation",
+    "csvconf",
+    "csv,conf,v3",
+    "math",
+    "mathematics",
+    "numeric computing",
+    "javascript",
+    "js",
+    "nodejs",
+    "node"
 	],
   "bugs": {
     "url": "https://github.com/kgryte/talks-nodejs-interactive-2016/issues"
