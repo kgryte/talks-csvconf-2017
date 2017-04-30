@@ -66,7 +66,7 @@
 
 		<!-- Any section element inside of this container is displayed as a slide -->
 		<div class="slides">
-			<section class="center">
+			<section class="center" data-transition="fade-out">
 				<div>
 					<a href="https://github.com/stdlib-js/stdlib"><img src="img/hex_sticker_black.svg" alt="stdlib" class="undecorated"></a>
 				</div>
@@ -134,11 +134,48 @@
 				</aside>
 			</section>
 
-			<section class="center">
-				<h2 class="no-text-transform">Heading</h2>
-				<pre><code class="hljs javascript" contenteditable>
-Code.
-				</code></pre>
+			<section class="center" data-transition="slide-in fade-out" data-transition-speed="fast">
+				<h2 class="no-text-transform">JavaScript</h2>
+
+				<aside class="notes">
+					<p>
+						First, let's talk about JavaScript.
+					</p>
+				</aside>
+			</section>
+
+			<section class="center" data-transition="none">
+				<aside class="notes">
+					(next slide)
+				</aside>
+			</section>
+
+			<section class="center" data-transition="zoom-in fade-out" data-transition-speed="default">
+				<h2 class="no-text-transform">Language of the Web</h2>
+
+				<aside class="notes">
+					<p>
+						JavaScript is THE language of the web, whether you like it or not.
+					</p>
+				</aside>
+			</section>
+
+			<section class="center" data-transition="none">
+				<div class=" fragment row">
+					<pre><code class="hljs javascript" contenteditable>
+import beep, { foo, bar } from 'beep';
+import beep from 'beep';
+import { foo, bar } from 'beep';
+import { foo as fu, bar } from 'beep';
+import * as beep from 'beep';
+import 'beep';
+					</code></pre>
+				</div>
+				<div class="fragment row">
+					<pre><code class="hljs javascript" contenteditable>
+const beep = require( 'beep' );
+					</code></pre>
+				</div>
 
 				<aside class="notes">
 
