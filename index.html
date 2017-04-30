@@ -414,15 +414,127 @@ const beep = require( 'beep' );
 				<h2 class="no-text-transform">Mad science.</h2>
 
 				<aside class="notes">
-					<p>
-						Peer-to-peer serverless grid-computing over WebRTC.
-					</p>
+					Peer-to-peer serverless grid-computing over WebRTC.
 				</aside>
 			</section>
 
 			<section class="center" data-transition="none">
 				<aside class="notes">
 					Hopefully, your interest is piqued and you are at least sympathetic as to why you should care about numeric computing in JavaScript.
+				</aside>
+			</section>
+
+			<section class="center" data-transition="zoom-in" data-transition-speed="default">
+				<h2 class="no-text-transform">State of Math in JavaScript</h2>
+
+				<aside class="notes">
+					So, at the most basic level, what is the state of math in JavaScript? Not great. :(
+				</aside>
+			</section>
+
+			<section class="center">
+				<div class="fragment row">
+					<ul class="column column-3">
+						<li>acos</li>
+						<li>asin</li>
+						<li>atan</li>
+						<li>atan2</li>
+						<li>cos</li>
+						<li>sin</li>
+						<li>tan</li>
+						<li>acosh</li>
+						<li>asinh</li>
+						<li>atanh</li>
+						<li>cosh</li>
+						<li>sinh</li>
+						<li>tanh</li>
+					</ul>
+					<ul class="column column-3">
+						<li>abs</li>
+						<li>exp</li>
+						<li>log (ln)</li>
+						<li>pow</li>
+						<li>sqrt</li>
+						<li>sign</li>
+						<li>cbrt</li>
+						<li>expm1</li>
+						<li>log10</li>
+						<li>log1p</li>
+						<li>log2</li>
+					</ul>
+					<ul class="column column-3">
+						<li>ceil</li>
+						<li>floor</li>
+						<li>round</li>
+						<li>fround</li>
+						<li>trunc</li>
+					</ul>
+					<ul class="column column-2">
+						<li>max</li>
+						<li>min</li>
+						<li>random</li>
+						<li>hypot</li>
+						<li>clz32</li>
+						<li>imul</li>
+					</ul>
+				</div>
+
+				<aside class="notes">
+					<p>
+						In ES5, the standard math library consisted of 18 functions and 8 constants. These functions can be categorized as trigonometric, other special functions, including rounding, and miscellaneous, including a PRNG.
+					</p>
+					<p>
+						ES2015/ES6 added 17 more functions to the standard math library. Again, these functions are broken down into trigonometric, other special functions, including rounding, and miscellaneous.
+					</p>
+					<p>
+						The addition of these 17 functions means the JavaScript standard math library has 35 functions.
+					</p>
+					<p>
+						In short, the JavaScript standard math library is quite small, especially when compared to other languages and dedicated numeric computing environments.
+					</p>
+					<p>
+						In comparison, the Golang standard math library has 54 functions (JS has 35), 8+ PRNGs, as well as support for 64-bit and 128-bit complex numbers. Notably, Golang has equivalents for most C/C++ standard math library functions.
+					</p>
+				</aside>
+			</section>
+
+			<section class="center" data-transition="none">
+				<aside class="notes">
+					Besides being small, the JavaScript standard math library has other problems.
+				</aside>
+			</section>
+
+			<section class="center" data-transition="slide-in fade-out">
+				<ul>
+					<li class="fragment">No standard algorithms.</li>
+					<li class="fragment">No minimum precision.</li>
+ 					<li class="fragment">Portability.</li>
+ 					<li class="fragment">No common codebase.</li>
+					<li class="fragment">Slow pace of innovation.</li>
+ 					<li class="fragment">Bugs.</li>
+				</ul>
+
+				<aside class="notes">
+					<ul>
+						<li>
+							ECMA-262 does not specify particular math algorithms (only recommends); hence implementors are free to choose algos according to speed/precision trade-offs
+						</li>
+						<li>
+							ECMA-262 does not require a minimum precision; hence, no guarantee that a given JavaScript environment has a precise implementation
+						</li>
+						<li>
+							Portability is non-existent for numeric computing applications due to potential cross-browser variability and potential variability from one browser version to the next
+						</li>
+						<li>
+							No common codebase, so resolving issues takes considerable time and effort, especially when different vendors use varying implementations in varying languages with varying organization and structure
+						</li>
+						<li>
+							Specification-level changes require cross-browser vendor consensus, causing the pace of innovation at the standards level to be slow (e.g., U/Int64 support has been on the table, off the table for more than a decade, and is most recently on the table as part of a BigInt proposal).
+						</li>
+						<li>
+							Bugs are common (cue bug or two; e.g., `pow`)
+						</li>
+					</ul>
 				</aside>
 			</section>
 
