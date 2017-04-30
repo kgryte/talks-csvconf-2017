@@ -16,7 +16,7 @@
   "main": "",
   "repository": {
     "type": "git",
-    "url": "git://github.com/kgryte/talks-nodejs-interactive-2016.git"
+    "url": "git://github.com/kgryte/talks-csvconf-2017.git"
   },
   "keywords": [
 		"talk",
@@ -33,7 +33,7 @@
     "node"
 	],
   "bugs": {
-    "url": "https://github.com/kgryte/talks-nodejs-interactive-2016/issues"
+    "url": "https://github.com/kgryte/talks-csvconf-2017/issues"
   },
   "dependencies": {},
   "devDependencies": {
