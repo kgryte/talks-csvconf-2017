@@ -1,0 +1,35 @@
+{
+  "name": "talk-TODO",
+  "version": "0.0.0",
+  "description": "Talk for TODO.",
+  "author": {
+    "name": "Athan Reines",
+    "email": "kgryte@gmail.com"
+  },
+  "contributors": [
+    {
+      "name": "Athan Reines",
+      "email": "kgryte@gmail.com"
+    }
+  ],
+  "scripts": {},
+  "main": "",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kgryte/talks-nodejs-interactive-2016.git"
+  },
+  "keywords": [
+		"talk",
+		"slides",
+		"presentation"
+	],
+  "bugs": {
+    "url": "https://github.com/kgryte/talks-nodejs-interactive-2016/issues"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "jshint": "2.x.x",
+    "jshint-stylish": "2.x.x"
+  },
+  "license": ""
+}
