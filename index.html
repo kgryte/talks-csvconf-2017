@@ -160,7 +160,7 @@
 				</aside>
 			</section>
 
-			<section class="center" data-transition="none">
+			<section class="center" data-transition="none fade-out" data-transition-speed="fast">
 				<div class=" fragment row">
 					<pre><code class="hljs javascript" contenteditable>
 import beep, { foo, bar } from 'beep';
@@ -178,7 +178,93 @@ const beep = require( 'beep' );
 				</div>
 
 				<aside class="notes">
+					<p>
+						Depending on your bent, it has flaws (cue example flaw) and, depending on your bent, it has positive qualities (cue example trait).
+					</p>
+				</aside>
+			</section>
 
+			<section class="center" data-transition="none fade-out" data-transition-speed="fast">
+				<div class="fragment">
+					<div class="row">
+						<p class="column column-2">&nbsp;</p>
+						<p class="column column-4">
+							MATLAB
+						</p>
+						<p class="column column-4">
+							R
+						</p>
+					</div>
+					<div class="row">
+						<p class="column column-2">&nbsp;</p>
+						<p class="column column-4">
+							Python
+						</p>
+						<p class="column column-4">
+							Mathematica
+						</p>
+					</div>
+					<div class="row">
+						<p class="column column-2">&nbsp;</p>
+						<p class="column column-4">
+							Julia
+						</p>
+					</div>
+				</div>
+				<aside class="notes">
+					<p>
+						When people think numeric computing and, in particular, what language they want to use for numeric computing, JavaScript is NOT the first to mind. Instead, people think MATLAB, R, Python, Mathematica, and more recently Julia. But not JavaScript.
+					</p>
+			</section>
+
+			<section class="center" data-transition="none">
+				<aside class="notes">
+					(next slide)
+				</aside>
+			</section>
+
+			<section class="center" data-transition="zoom-in fade-out" data-transition-speed="default">
+				<h2 class="no-text-transform">Why?</h2>
+
+				<aside class="notes">
+					<p>
+						Why?
+					</p>
+				</aside>
+			</section>
+
+			<section class="center">
+
+				<ul>
+					<li class="fragment">Dynamically compiled</li>
+					<li class="fragment">U/Int64</li>
+ 					<li class="fragment">BigInt/BigNumber</li>
+					<li class="fragment">Single-threaded</li>
+ 					<li class="fragment">Performance</li>
+					<li class="fragment">C/C++/Fortran bindings</li>
+				</ul>
+
+				<aside class="notes">
+					<ul>
+						<li>
+							Dynamically compiled: so are R, Python, Julia, etc.
+						</li>
+						<li>
+     						Int64: but neither does R (https://www.r-bloggers.com/r-in-a-64-bit-world/; requires 3rd party package); in Python v2, had a "long" type (arbitrary-precision integer, which depending on how implemented can be a bit slower than dedicated machine types), which is now true for all integers in Python v3
+     					</li>
+     					<li>
+							No native BigInt/BigNumber support: neither does R (need to use a package), MATLAB requires a toolbox, Python uses arbitrary-precision integers
+						</li>
+						<li>
+     						Single-threaded: so is R
+     					</li>
+     					<li>
+							Perf: R is notoriously "slow" (slow being a relative term); JavaScript is faster (cue a couple benchmarks)
+						</li>
+						<li>
+							C/C++/Fortran bindings: Node.js native add-ons and WebAssembly
+						</li>
+					</ul>
 				</aside>
 			</section>
 
