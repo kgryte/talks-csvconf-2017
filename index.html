@@ -659,6 +659,82 @@ var y = Math.exp( 100.0 );
 			</section>
 
 			<section class="center">
+				<ul>
+					<li class="fragment">False assumptions.</li>
+					<li class="fragment">Low hanging fruit.</li>
+					<li class="fragment">Poor implementations.</li>
+ 					<li class="fragment">Insufficient scope.</li>
+					<li class="fragment">Lack of ambition.</li>
+				</ul>
+
+				<aside class="notes">
+					<ul>
+						<li>
+							First, most libraries assume a good standard math library. As we already discussed, this is false. Any library which makes this assumption is at an immediate inherent disadvantage.
+						</li>
+						<li>
+							Next, much of what you see in JavaScript and on npm are the same types of libraries all addressing the same low hanging fruit (e.g., calculating the mean, variance, and standard deviation of an array), with minor differences and stylistic variations. And while the idea is fine, most people writing these libraries are either not numerically trained or simply have not done their homework as to how to write robust algorithms, which means the implementations of even the most basic functions are poor.
+						</li>
+						<li>
+							One of my basic litmus tests for any math library is how a library computes the variance. The classic definition involving the sum of squared differences is ill-suited for numeric computation due to the risk of overflow and catastrophic cancellation. Unfortunately, a majority of libraries fail this test.
+						</li>
+						<li>
+							Next, a few libraries have pushed the boundaries of what is possible. For instance, Andrew Karpathy's ConvNet.js, which does "deep learning" in a browser, or Weblas, which tries to implement BLAS algorithms via WebGL to run on graphic cards. However, these libraries are too often more proof-of-concepts than general frameworks which provide a solid foundation on top of which we can build more advanced numeric computing libraries.
+						</li>
+						<li>
+							Next, there is the work of Mikola Lysenko, who showed how the same multidimensional data structures used in NumPy, Julia, R, and MATLAB, and required for interfacing with BLAS libraries can be implemented in JavaScript (`ndarray`). However, despite this trailblazing work, the community has yet to effectively harness the concept of an ndarray within a general purpose computing framework.
+						</li>
+					</ul>
+				</aside>
+			</section>
+
+			<section class="center">
+				<aside class="notes">
+					(next slide)
+				</aside>
+			</section>
+
+			<section class="center" data-transition="zoom-in fade-out" data-transition-speed="default">
+				<h2 class="no-text-transform">A lot of noise.</h2>
+
+				<aside class="notes">
+					In short, there are glimmers of hope, but a lot of noise. And in particular, a lot of noise coming from people who lack the expertise and authority to be making noise in the first place.
+				</aside>
+			</section>
+
+			<section class="center">
+				<aside class="notes">
+					So, the ecosystem has failed to live up to our highest hopes and aspirations. But all is not lost. People have identified all the aforementioned problems and are actively working to making numeric computing possible in JavaScript and on the web. And those people are working on a project called stdlib.
+				</aside>
+			</section>
+
+			<section id="banner" class="center" data-background-color="#000" data-transition="zoom-in" data-transition-speed="slow">
+				<div class="row">
+					<div class="column column-12">
+						<a href=""><img src="img/stdlib.png" alt="stdlib" class="undecorated"></a>
+					</div>
+				</div>
+
+				<aside class="notes">
+					Stdlib is a standard library for JavaScript and Node.js, with an emphasis on numeric computing.
+				</aside>
+			</section>
+
+			<section class="center">
+				<aside class="notes">
+					(next slide)
+				</aside>
+			</section>
+
+			<section class="center" data-transition="zoom-in fade-out" data-transition-speed="default">
+				<h2 class="no-text-transform"></h2>
+
+				<aside class="notes">
+
+				</aside>
+			</section>
+
+			<section class="center">
 				<h2 class="no-text-transform">Thank you!</h2>
 
 				<aside class="notes">
@@ -676,18 +752,6 @@ var y = Math.exp( 100.0 );
 					<br>
 					<small><a href="https://www.patreon.com/athan"><i class="fa fa-bitcoin"></i> https://www.patreon.com/athan</a></small>
 				</p>
-
-				<aside class="notes">
-
-				</aside>
-			</section>
-
-			<section class="center" data-background-color="#000" data-transition="slide-in slide-out" data-transition-speed="slow">
-				<div class="row">
-					<div class="column column-12">
-						<a href=""><img src="img/stdlib.png" alt="stdlib" class="undecorated"></a>
-					</div>
-				</div>
 
 				<aside class="notes">
 

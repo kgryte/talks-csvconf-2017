@@ -60,6 +60,10 @@
 	color: #1DA1F2;
 }
 
+.hidden {
+	display: none;
+}
+
 header,
 footer {
 	z-index: 9999999999;
